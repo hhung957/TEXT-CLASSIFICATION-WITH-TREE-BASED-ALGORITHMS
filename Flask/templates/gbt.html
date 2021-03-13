@@ -1,0 +1,95 @@
+<html>
+<head>
+	<title>Gradient Boosted Tree</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
+	<!--<link rel="stylesheet" href="theme.css"> -->
+</head>
+<body>
+	<h1>Gradient Boosted Tree</h1>
+
+
+	<div class="form-style-2">
+		<div class="form-style-2-heading">Training Gradient Boosted Tree</div>
+		<form action = "http://localhost:5000/traingbt" method = "post">
+			<label for="field1">
+				<span>Number of iteration: </span><input type="text" class="input-field" name="maxIter" />
+			</label>
+			<label for="field1">
+				<span>Maximum depth of the tree: </span><input type="text" class="input-field" name="maxDepth"/>
+			</label>
+			<label for="field1">
+				<span>Learning rate: </span><input type="text" class="input-field" name="stepSize"/>
+			</label>
+			<label><span> </span><input type="submit" value="Train" /></label>
+		</form>
+	</div>
+
+	<div class="form-style-2">
+		<div class="form-style-2-heading">Testing Gradient Boosted Tree</div>
+		<form action="http://localhost:5000/testgbt" method="post">
+			<label for="field1"><span>Name test data</span><input type="text" class="input-field-1" name="testdata" /></label>
+			<label><span> </span><input type="submit" value="Test" /></label>
+		</form>
+	</div>
+	{% if result is not none%}
+	<div>
+		<table border="1">
+			{% for key, value in result.items() %}
+			<tr>
+				<th>{{ key }} </th>
+				<td>{{ value }} </td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+	{% endif %}
+
+
+	<div class="form-style-2">
+		<div class="form-style-2-heading">Predict Gradient Boosted Tree</div>
+		<form action="http://localhost:5000/predictgbt" method="post">
+			<label for="field1"><span>Name: </span><input type="text" class="input-field-1" name="name" /></label>
+			<label><span> </span><input type="submit" value="Predict" /></label>
+		</form>
+	</div>
+	{% if prediction is not none%}
+	<dir>
+		<p>{{ prediction }}</p>
+	</dir>
+	{% endif %}
+
+<!--
+	<form action = "http://localhost:5000/traingbt" method = "post">
+		<p>Number of iteration:</p>
+		<p><input type = "text" name = "maxIter" required/></p>
+		<p>Maximum depth of the tree: </p>
+		<p><input type = "text" name = "maxDepth" required/></p>
+		<p>Learning rate: </p>
+		<p><input type = "text" name = "stepSize" required/></p>
+		<p><input type = "submit" value = "Train" /></p>
+	</form>
+	<form action = "http://localhost:5000/testgbt" method = "post">
+		<p>Link to Test Data:</p>
+		<p><input type = "text" name = "testdata" required/></p>
+		<p><input type = "submit" value = "Test" /></p>
+	</form>
+	{% if result is not none%}
+	<table border="1">
+		{% for key, value in result.items() %}
+		<tr>
+			<th>{{ key }} </th>
+			<td>{{ value }} </td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% endif %}
+	<form action = "http://localhost:5000/predictgbt" method = "post">
+		<p>Name:</p>
+		<p><input type = "text" name = "name" required/></p>
+		<p><input type = "submit" value = "Predict" /></p>
+	</form>
+	{% if prediction is not none%}
+	<p>{{ prediction }}</p>
+	{% endif %} -->
+</body>
+</html>

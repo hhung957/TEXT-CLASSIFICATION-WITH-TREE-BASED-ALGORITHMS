@@ -1,0 +1,100 @@
+<html>
+<head>
+	<title>Random Forest</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
+	<!-- <link rel="stylesheet" href="theme.css"> -->
+</head>
+<body>
+	<h1>Random Forest</h1>
+
+	<div class="form-style-2">
+		<div class="form-style-2-heading">Training Random Forest</div>
+		<form action="http://localhost:5000/trainrf" method="post">
+			<label for="field1"><span>Number of Tree: </span><input type="text" class="input-field" name="numTrees" /></label>
+			<label for="field1">
+				<span>Maximum depth of the tree: </span><input type="text" class="input-field" name="maxDepth"/>
+			</label>
+			<label for="field1"><span>Impurity</span><select name="impurity" class="select-field">
+				<option value="gini">Gini</option>
+				<option value="entropy">Entropy</option>
+			</select></label>
+			<label><span> </span><input type="submit" value="Train" /></label>
+		</form>
+	</div>
+
+	<div class="form-style-2">
+		<div class="form-style-2-heading">Testing Random Forest</div>
+		<form action="http://localhost:5000/testrf" method="post">
+			<label for="field1"><span>Name test data</span><input type="text" class="input-field-1" name="testdata" /></label>
+			<label><span> </span><input type="submit" value="Test" /></label>
+		</form>
+	</div>
+	{% if result is not none%}
+	<div>
+		<table border="1">
+			{% for key, value in result.items() %}
+			<tr>
+				<th>{{ key }} </th>
+				<td>{{ value }} </td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+	{% endif %}
+	<div class="form-style-2">
+		<div class="form-style-2-heading">Predict Random Forest</div>
+		<form action="http://localhost:5000/predictrf" method="post">
+			<label for="field1"><span>Name: </span><input type="text" class="input-field-1" name="name" /></label>
+			<label><span> </span><input type="submit" value="Predict" /></label>
+		</form>
+	</div>
+	{% if prediction is not none%}
+	<dir>
+		<p>{{ prediction }}</p>
+	</dir>
+	{% endif %}
+
+
+
+
+
+
+
+<!--
+	<form action = "http://localhost:5000/trainrf" method = "post">
+		<p>Number of Tree:</p>
+		<p><input type = "text" name = "numTrees" required/></p>
+		<p>Maximum depth of the tree: </p>
+		<p><input type = "text" name = "maxDepth" required/></p>
+		<p>Impurity:</p>
+		<select name="impurity">
+			<option value="gini">Gini</option>
+			<option value="entropy">Entropy</option>
+		</select>
+		<p><input type = "submit" value = "Train" /></p>
+	</form>
+	<form action = "http://localhost:5000/testrf" method = "post">
+		<p>Link to Test Data:</p>
+		<p><input type = "text" name = "testdata" required/></p>
+		<p><input type = "submit" value = "Test" /></p>
+	</form>
+	{% if result is not none%}
+	<table border="1">
+		{% for key, value in result.items() %}
+		<tr>
+			<th>{{ key }} </th>
+			<td>{{ value }} </td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% endif %}
+	<form action = "http://localhost:5000/predictrf" method = "post">
+		<p>Name:</p>
+		<p><input type = "text" name = "name" required/></p>
+		<p><input type = "submit" value = "Predict" /></p>
+	</form>
+	{% if prediction is not none%}
+	<p>{{ prediction }}</p>
+	{% endif %}  -->
+</body>
+</html>
